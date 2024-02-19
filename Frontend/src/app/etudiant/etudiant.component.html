@@ -1,0 +1,65 @@
+
+  
+  <div class="mt-5">
+      <div class="row">
+          <div class="col-md-4 " >
+              <form [formGroup]="myForm" (ngSubmit)="enregistrer()">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Prenom</label>
+                    <input type="text" class="form-control" formControlName="firstname" >
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nom</label>
+                    <input type="text" class="form-control" formControlName="lastname" >
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputtext1" class="form-label">Matricule</label>
+                    <input type="text" class="form-control" formControlName="matricule">
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputtext1" class="form-label">Département</label>
+                    <select name="" class="form-control" id="" formControlName="departement">
+                          <option *ngFor="let  dept of departements " value="{{dept._id}}">{{dept.name}}</option>
+                    </select>
+                  </div>
+                 
+                  <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">
+                    {{ isCreationMode ? 'Enregistrer' : 'Modifier' }}
+                  </button>
+             </form>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Prenom</th>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Matricule</th>
+                      <th scope="col">Département</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let etudiant of etudiants">
+                      <th scope="row">{{etudiant._id}}</th>
+                      <td>{{etudiant.firstname}}</td>
+                      <td>{{etudiant.lastname}}</td>
+                      <td>{{etudiant.matricule}}</td>
+                      <td>{{etudiant.departement.name}}</td>
+                      <td class="d-flex">
+                        <button class="btn btn-sm btn-warning mr-2" (click)="modifierEtudiant(etudiant)">Modifier</button>
+                        <button class="btn btn-sm btn-danger" (click)="supprimerEtudiant(etudiant._id)">Supprimer</button>
+                    </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+          </div>
+      </div>
+  </div>
+  
