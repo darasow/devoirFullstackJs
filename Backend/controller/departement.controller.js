@@ -11,14 +11,15 @@ const create = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-    const departements = await Departement.find();
+    const departements = await Departement.find({ deleted: false });
     res.json(departements);
 };
 
 const supprimer = async (req, res) => {
     const { id } = req.params;
     try {
-        await Departement.findByIdAndDelete(id);
+        // await Departement.findByIdAndUpdate(id, { deleted: true }, { new: true });
+        await Departement.findByIdAndUpdate(id, { deleted: true }, { new: true });
         res.json({ message: "Le département a été supprimé avec succès." });
     } catch (error) {
         res.status(500).json({ error: "Une erreur s'est produite lors de la suppression du département." });

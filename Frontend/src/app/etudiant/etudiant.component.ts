@@ -12,6 +12,8 @@ export class EtudiantComponent {
 
   departements: any;
   etudiants: any;
+  searchText: string = ''; // Variable de recherche
+  filteredEtudiants: any; // Liste filtrée des étudiants
   myForm: FormGroup;
   isCreationMode: boolean = true; // Variable pour indiquer si le formulaire est en mode création ou modification
   etudiantId: string | null = null; // Variable pour stocker l'ID de l'étudiant à modifier
@@ -80,6 +82,18 @@ export class EtudiantComponent {
       }
     }
   }
+  
+    // Fonction pour effectuer la recherche en temps réel
+    search() {
+      if (this.searchText.trim() !== '') {
+        this.filteredEtudiants = this.etudiants.filter((etudiant: { matricule: string; }) =>
+          etudiant.matricule.toLowerCase().includes(this.searchText.toLowerCase())
+        );
+        this.etudiants =  this.filteredEtudiants ;
+      } else {
+        this.getEtudiants();
+      }
+    }
 
   modifierEtudiant(etudiant: any) {
     this.isCreationMode = false;
@@ -100,7 +114,7 @@ export class EtudiantComponent {
         },
         error: (error: any) => console.error(error)
       });
-    }
+    } 
   }
   
   

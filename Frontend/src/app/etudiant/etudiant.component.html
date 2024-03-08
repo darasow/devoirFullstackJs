@@ -1,7 +1,12 @@
 
   
   <div class="mt-5">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Rechercher par matricule" [(ngModel)]="searchText" (input)="search()">
+      <button class="btn btn-outline-secondary" type="button" (click)="search()">Rechercher</button>
+  </div>
       <div class="row">
+        
           <div class="col-md-4 " >
               <form [formGroup]="myForm" (ngSubmit)="enregistrer()">
                   <div class="mb-3">

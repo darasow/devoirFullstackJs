@@ -13,6 +13,8 @@ export class DepartementComponent {
 
   departements: any;
   myForm: FormGroup;
+  searchText: string = ''; // Variable de recherche
+  filteredDepartement: any; // Liste filtrée des étudiants
   isCreationMode: boolean = true; // Variable pour indiquer si le formulaire est en mode création ou modification
   departementId: string | null = null; // Variable pour stocker l'ID du département à modifier
 
@@ -62,6 +64,16 @@ export class DepartementComponent {
           console.error('ID du département manquant');
         }
       }
+    }
+  }
+  search() {
+    if (this.searchText.trim() !== '') {
+      this.filteredDepartement = this.departements.filter((departement: { name: string; }) =>
+      departement.name.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+      this.departements =  this.filteredDepartement ;
+    } else {
+      this.getDepartements();
     }
   }
 
